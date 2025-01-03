@@ -1,16 +1,30 @@
 // src/App.js
 
-import React from "react";
+import React, { useState } from "react";
 import "./index.css";
 
+// Add your social media links
+const socialLinks = {
+  linkedin: "https://www.linkedin.com/in/kanjudmuabbaz/",
+  github: "https://github.com/kanjudmuabbaz",
+  Facebook: "https://facebook.com/kanjud.muabbaz",
+  instagram: "https://www.instagram.com/this.is.meowbaaz",
+};
+
 function App() {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+
   return (
     <div className="bg-gradient-to-br from-[#2a4365] to-[#4e73df] min-h-screen flex flex-col text-white">
-      {/* Header Section */}
-      <header className="bg-[#1a365d] py-6 shadow-lg">
+      {/* Header Section with Hamburger Menu */}
+      <header className="bg-[#1a365d] py-6 shadow-lg relative">
         <nav className="max-w-screen-xl mx-auto flex justify-between items-center px-8">
           <div className="text-3xl font-extrabold">Kifayat Muaz</div>
-          <ul className="flex space-x-8">
+          <ul className="hidden md:flex space-x-8">
             <li>
               <a
                 href="#about"
@@ -28,7 +42,38 @@ function App() {
               </a>
             </li>
           </ul>
+          {/* Hamburger icon */}
+          <div className="md:hidden flex items-center" onClick={toggleMenu}>
+            <button className="text-3xl">
+              <i className={`fas ${isMenuOpen ? "fa-times" : "fa-bars"}`}></i>
+            </button>
+          </div>
         </nav>
+        {/* Mobile Menu */}
+        <div
+          className={`absolute top-20 left-0 right-0 bg-[#1a365d] p-6 ${
+            isMenuOpen ? "block" : "hidden"
+          } md:hidden`}
+        >
+          <ul className="flex flex-col space-y-6">
+            <li>
+              <a
+                href="#about"
+                className="text-lg hover:text-[#ffcc00] transition-all"
+              >
+                About
+              </a>
+            </li>
+            <li>
+              <a
+                href="#contact"
+                className="text-lg hover:text-[#ffcc00] transition-all"
+              >
+                Contact
+              </a>
+            </li>
+          </ul>
+        </div>
       </header>
 
       {/* About Section */}
@@ -56,31 +101,53 @@ function App() {
         </p>
 
         {/* Social Links */}
-        <div className="flex space-x-6 mt-6">
-          <a
-            href="https://twitter.com/yourprofile"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="p-4 rounded-full bg-[#1da1f2] text-white shadow-xl hover:bg-[#0d8bc5] transition-all"
-          >
-            <i className="fab fa-twitter text-2xl"></i>
-          </a>
-          <a
-            href="https://linkedin.com/in/yourprofile"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="p-4 rounded-full bg-[#0077b5] text-white shadow-xl hover:bg-[#005a8d] transition-all"
-          >
-            <i className="fab fa-linkedin text-2xl"></i>
-          </a>
-          <a
-            href="https://github.com/yourprofile"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="p-4 rounded-full bg-[#333] text-white shadow-xl hover:bg-[#555] transition-all"
-          >
-            <i className="fab fa-github text-2xl"></i>
-          </a>
+        <div className="mt-8">
+          <ul className="mt-4 flex justify-center space-x-6">
+            {/* LinkedIn Icon */}
+            <li>
+              <a
+                href={socialLinks.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-blue-600 hover:text-blue-800 text-3xl transition-all duration-300 transform hover:scale-105"
+              >
+                <i className="fab fa-linkedin"></i>
+              </a>
+            </li>
+            {/* GitHub Icon */}
+            <li>
+              <a
+                href={socialLinks.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-gray-800 hover:text-gray-600 text-3xl transition-all duration-300 transform hover:scale-105"
+              >
+                <i className="fab fa-github"></i>
+              </a>
+            </li>
+            {/* Facebook Icon */}
+            <li>
+              <a
+                href={socialLinks.Facebook}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-blue-400 hover:text-blue-600 text-3xl transition-all duration-300 transform hover:scale-105"
+              >
+                <i className="fab fa-facebook"></i>
+              </a>
+            </li>
+            {/* Instagram Icon */}
+            <li>
+              <a
+                href={socialLinks.instagram}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-pink-600 hover:text-pink-800 text-3xl transition-all duration-300 transform hover:scale-105"
+              >
+                <i className="fab fa-instagram"></i>
+              </a>
+            </li>
+          </ul>
         </div>
       </section>
 
